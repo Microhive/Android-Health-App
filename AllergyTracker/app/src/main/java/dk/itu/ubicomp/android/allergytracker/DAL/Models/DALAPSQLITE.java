@@ -40,9 +40,9 @@ public class DALAPSQLITE implements IDAL<AllergyProduct> {
     @Override
     public AllergyProduct create(AllergyProduct item) {
         ContentValues values = new ContentValues();
-        values.put(AllergyProductReaderDbHelper.COLUMN_NAME_TITLE, "Title");
-        values.put(AllergyProductReaderDbHelper.COLUMN_NAME_DESCRIPTION, "Description");
-        values.put(AllergyProductReaderDbHelper.COLUMN_NAME_BARCODE, "12389234");
+        values.put(AllergyProductReaderDbHelper.COLUMN_NAME_TITLE, item.getTitle());
+        values.put(AllergyProductReaderDbHelper.COLUMN_NAME_DESCRIPTION, item.getDescription());
+        values.put(AllergyProductReaderDbHelper.COLUMN_NAME_BARCODE, item.getBarcode());
         long insertId = database.insert(AllergyProductReaderDbHelper.TABLE_ALLERGYPRODUCT, null, values);
         Cursor cursor = database.query(AllergyProductReaderDbHelper.TABLE_ALLERGYPRODUCT,
                 allColumns, AllergyProductReaderDbHelper.COLUMN_NAME_ENTRY_ID + " = " + insertId, null,

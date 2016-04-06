@@ -1,14 +1,16 @@
 package dk.itu.ubicomp.android.allergytracker.DAL.Models;
 
+import java.io.Serializable;
+
 /**
  * Created by Eiler on 06/04/2016.
  */
-public class AllergyProduct {
+public class AllergyProduct implements Serializable {
 
-    public Long id;
-    public String title;
-    public String description;
-    public String barcode;
+    private Long id;
+    private String title;
+    private String description;
+    private String barcode;
 
     public Long getId() {
         return id;

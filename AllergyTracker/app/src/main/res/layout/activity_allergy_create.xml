@@ -13,21 +13,10 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/barcode_header"
         android:id="@+id/status_message"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/barcode_value"
-        android:layout_below="@+id/status_message"
+        android:layout_below="@+id/save_button"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="110dp"
-        android:layout_alignRight="@+id/status_message"
-        android:layout_alignEnd="@+id/status_message" />
+        android:layout_marginTop="20dp"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -35,18 +24,20 @@
         android:text="@string/read_barcode"
         android:id="@+id/read_barcode"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignRight="@+id/use_flash"
+        android:layout_alignEnd="@+id/use_flash"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/auto_focus"
         android:id="@+id/auto_focus"
+        android:checked="false"
         android:layout_below="@+id/barcode_value"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="66dp"
-        android:checked="false" />
+        android:layout_alignParentStart="true"/>
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -57,5 +48,63 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:checked="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Add New Product"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="32sp"
+        android:layout_marginBottom="20dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/title_value"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:maxLength="50"
+        android:layout_marginBottom="20dp"
+        android:hint="title"
+        android:singleLine="true"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/description_value"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/title_value"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="30dp"
+        android:hint="description"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/barcode_value"
+        android:hint="barcode"
+        android:inputType="none"
+        android:layout_below="@+id/status_message"
+        android:layout_alignRight="@+id/use_flash"
+        android:layout_alignEnd="@+id/use_flash"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save Product"
+        android:id="@+id/save_button"
+        android:layout_below="@+id/description_value"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
 
 </RelativeLayout>

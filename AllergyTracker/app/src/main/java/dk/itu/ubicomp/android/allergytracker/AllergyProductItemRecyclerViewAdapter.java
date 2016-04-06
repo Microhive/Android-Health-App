@@ -37,7 +37,9 @@ public class AllergyProductItemRecyclerViewAdapter extends RecyclerView.Adapter<
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.mIdView.setText(mValues.get(position).getId().toString());
-        holder.mContentView.setText(mValues.get(position).getTitle());
+        holder.mTitleView.setText(mValues.get(position).getTitle());
+        holder.mDescriptionView.setText(mValues.get(position).getDescription());
+//        holder.mBarcodeView.setText(mValues.get(position).getBarcode());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,19 +61,24 @@ public class AllergyProductItemRecyclerViewAdapter extends RecyclerView.Adapter<
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView mIdView;
-        public final TextView mContentView;
+        public final TextView mTitleView;
+        public final TextView mDescriptionView;
+//        public final TextView mBarcodeView;
+
         public AllergyProduct mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
             mIdView = (TextView) view.findViewById(R.id.id);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            mTitleView = (TextView) view.findViewById(R.id.title);
+            mDescriptionView = (TextView) view.findViewById(R.id.description);
+//            mBarcodeView = (TextView) view.findViewById(R.id.barcode);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + mTitleView.getText() + "'";
         }
     }
 }

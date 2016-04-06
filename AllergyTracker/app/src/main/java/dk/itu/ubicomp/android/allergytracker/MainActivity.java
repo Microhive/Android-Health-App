@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import dk.itu.ubicomp.android.allergytracker.DAL.Models.AllergyProduct;
@@ -62,6 +63,8 @@ public class MainActivity extends AppCompatActivity implements AllergyProductIte
 
     @Override
     public void onListFragmentInteraction(AllergyProduct item) {
-        Toast.makeText(this, "Hey", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(MainActivity.this, MainCRUDActivity.class);
+        intent.putExtra("ALLERGYITEM", item);
+        startActivity(intent);
     }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="wrap_content"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:orientation="horizontal">
 
@@ -9,12 +9,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
+        android:text="#"
         android:textAppearance="?attr/textAppearanceListItem"/>
 
     <TextView
-        android:id="@+id/content"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem"/>
-</LinearLayout>
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:text="Title"
+        android:layout_alignTop="@+id/id"
+        android:layout_toRightOf="@+id/id"
+        android:layout_toEndOf="@+id/id"
+        android:singleLine="true"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:text="Description"
+        android:layout_below="@+id/id"
+        android:layout_alignParentEnd="true"
+        android:singleLine="true"
+        android:layout_toRightOf="@+id/id"
+        android:layout_toEndOf="@+id/id"
+        android:layout_marginBottom="10dp"/>
+</RelativeLayout>

@@ -2,10 +2,7 @@ package dk.itu.ubicomp.android.allergytracker;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -23,7 +20,10 @@ public class CreateAllergyActivity extends AppCompatActivity implements View.OnC
     private CompoundButton autoFocus;
     private CompoundButton useFlash;
     private TextView statusMessage;
-    private TextView barcodeValue;
+    private TextView titleTextView;
+    private TextView descriptionTextView;
+    private TextView barcodeTextView;
+
 
     private static final int RC_BARCODE_CAPTURE = 9001;
     private static final String TAG = "BarcodeMain";
@@ -34,19 +34,15 @@ public class CreateAllergyActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_allergy_create);
 
         statusMessage = (TextView)findViewById(R.id.status_message);
-        barcodeValue = (TextView)findViewById(R.id.barcode_value);
+        titleTextView = (TextView)findViewById(R.id.title_value);
+        descriptionTextView = (TextView)findViewById(R.id.description_value);
+        barcodeTextView = (TextView)findViewById(R.id.barcode_value);
 
         autoFocus = (CompoundButton) findViewById(R.id.auto_focus);
         useFlash = (CompoundButton) findViewById(R.id.use_flash);
 
         findViewById(R.id.read_barcode).setOnClickListener(this);
-
-        AllergyProduct item = new AllergyProduct();
-        item.setTitle("title");
-        item.setDescription("description");
-        item.setBarcode("123");
-
-        AllergyProductDb.getInstance(this).create(item);
+        findViewById(R.id.save_button).setOnClickListener(this);
     }
 
     /**
@@ -65,6 +61,33 @@ public class CreateAllergyActivity extends AppCompatActivity implements View.OnC
             startActivityForResult(intent, RC_BARCODE_CAPTURE);
         }
 
+        if (v.getId() == R.id.save_button)
+        {
+            Boolean fieldsAreOK = true;
+            if (titleTextView.getText().toString().trim().equals(""))
+            {
+                titleTextView.setError("Title is required!");
+                fieldsAreOK = false;
+            }
+
+            if (barcodeTextView.getText().toString().trim().equals(""))
+            {
+                barcodeTextView.setError("Barcode is required!");
+                fieldsAreOK = false;
+            }
+
+            if (fieldsAreOK)
+            {
+                AllergyProduct item = new AllergyProduct();
+                item.setTitle(titleTextView.getText().toString());
+                item.setDescription(descriptionTextView.getText().toString());
+                item.setBarcode(barcodeTextView.getText().toString());
+
+                AllergyProductDb.getInstance(this).create(item);
+
+                this.finish();
+            }
+        }
     }
 
     /**
@@ -96,7 +119,7 @@ public class CreateAllergyActivity extends AppCompatActivity implements View.OnC
                 if (data != null) {
                     Barcode barcode = data.getParcelableExtra(BarcodeCaptureActivity.BarcodeObject);
                     statusMessage.setText(R.string.barcode_success);
-                    barcodeValue.setText(barcode.displayValue);
+                    barcodeTextView.setText(barcode.displayValue);
                     Log.d(TAG, "Barcode read: " + barcode.displayValue);
                 } else {
                     statusMessage.setText(R.string.barcode_failure);
