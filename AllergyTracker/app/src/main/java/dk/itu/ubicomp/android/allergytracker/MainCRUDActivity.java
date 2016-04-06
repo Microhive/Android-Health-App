@@ -33,6 +33,7 @@ public class MainCRUDActivity extends AppCompatActivity implements View.OnClickL
         barcodeTextView.setText(mAllergyProduct.getBarcode().toString());
 
         findViewById(R.id.update_button).setOnClickListener(this);
+        findViewById(R.id.delete_button).setOnClickListener(this);
     }
 
     /**
@@ -68,6 +69,12 @@ public class MainCRUDActivity extends AppCompatActivity implements View.OnClickL
                 AllergyProductDb.getInstance(this).update(item);
                 this.finish();
             }
+        }
+
+        if (v.getId() == R.id.delete_button)
+        {
+            AllergyProductDb.getInstance(this).remove(mAllergyProduct.getId());
+            this.finish();
         }
     }
 

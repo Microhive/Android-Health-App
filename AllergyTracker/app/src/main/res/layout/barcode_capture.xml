@@ -11,7 +11,8 @@
   <dk.itu.ubicomp.android.allergytracker.camera.CameraSourcePreview
       android:id="@+id/preview"
       android:layout_width="match_parent"
-      android:layout_height="match_parent">
+      android:layout_height="match_parent"
+      >
 
     <dk.itu.ubicomp.android.allergytracker.camera.GraphicOverlay
         android:id="@+id/graphicOverlay"

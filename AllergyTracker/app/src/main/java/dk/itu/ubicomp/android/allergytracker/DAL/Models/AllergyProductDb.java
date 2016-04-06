@@ -34,7 +34,7 @@ public class AllergyProductDb {
         return DALDb.create(item);
     }
 
-    public void remove(int id) {
+    public void remove(Long id) {
         DALDb.remove(id);
     }
 

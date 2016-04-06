@@ -7,8 +7,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
+    android:scrollbars="vertical"
+    android:fadeScrollbars="true"
     app:layoutManager="LinearLayoutManager"
     tools:context="dk.itu.ubicomp.android.allergytracker.AllergyProductItemFragment"
     tools:listitem="@layout/fragment_allergyproductitem"/>

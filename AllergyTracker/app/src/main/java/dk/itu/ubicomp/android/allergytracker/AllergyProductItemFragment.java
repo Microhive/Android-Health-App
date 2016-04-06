@@ -6,6 +6,7 @@ import android.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,24 +69,25 @@ public class AllergyProductItemFragment extends Fragment {
             Context context = view.getContext();
             recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
+                recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
             } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount, GridLayoutManager.VERTICAL, false));
             }
+            recyclerView.setHasFixedSize(true);
             List<AllergyProduct> list = AllergyProductDb.getInstance(getActivity()).getItems();
             List<AllergyProduct> shallowCopy = list.subList(0, list.size());
             Collections.reverse(shallowCopy);
-            recyclerView.setAdapter(new AllergyProductItemRecyclerViewAdapter(shallowCopy, mListener));
+            recyclerView.setAdapter(new AllergyProductItemRecyclerViewAdapter(getActivity(), shallowCopy, mListener));
         }
         return view;
     }
 
-//    @Override
-//    public void onResume()
-//    {
-//        super.onResume();
-//        recyclerView.getAdapter().notifyDataSetChanged();
-//    }
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        ((AllergyProductItemRecyclerViewAdapter)recyclerView.getAdapter()).reloadAdapterListFromSource();
+    }
 
     @Override
     public void onAttach(Context context) {

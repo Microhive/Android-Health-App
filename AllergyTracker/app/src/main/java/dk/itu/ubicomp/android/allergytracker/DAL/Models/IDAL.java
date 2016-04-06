@@ -9,7 +9,7 @@ import dk.itu.ubicomp.android.allergytracker.DAL.Models.AllergyProduct;
  */
 public interface IDAL <E>{
     AllergyProduct create(E item);
-    void remove(int id);
+    void remove(Long id);
     void update(E item);
     List<E> getItems();
 }

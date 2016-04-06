@@ -1,5 +1,6 @@
 package dk.itu.ubicomp.android.allergytracker;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +9,9 @@ import android.widget.TextView;
 
 import dk.itu.ubicomp.android.allergytracker.AllergyProductItemFragment.OnListFragmentInteractionListener;
 import dk.itu.ubicomp.android.allergytracker.DAL.Models.AllergyProduct;
+import dk.itu.ubicomp.android.allergytracker.DAL.Models.AllergyProductDb;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -20,10 +23,21 @@ public class AllergyProductItemRecyclerViewAdapter extends RecyclerView.Adapter<
 
     private final List<AllergyProduct> mValues;
     private final OnListFragmentInteractionListener mListener;
+    private Context context;
 
-    public AllergyProductItemRecyclerViewAdapter(List<AllergyProduct> items, OnListFragmentInteractionListener listener) {
+    public AllergyProductItemRecyclerViewAdapter(Context context, List<AllergyProduct> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
+    }
+
+    public void reloadAdapterListFromSource()
+    {
+        mValues.clear();
+        List<AllergyProduct> list = AllergyProductDb.getInstance(context).getItems();
+        List<AllergyProduct> shallowCopy = list.subList(0, list.size());
+        Collections.reverse(shallowCopy);
+        mValues.addAll(shallowCopy);
+        this.notifyDataSetChanged();
     }
 
     @Override
@@ -36,7 +50,7 @@ public class AllergyProductItemRecyclerViewAdapter extends RecyclerView.Adapter<
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).getId().toString());
+//        holder.mIdView.setText(mValues.get(position).getId().toString());
         holder.mTitleView.setText(mValues.get(position).getTitle());
         holder.mDescriptionView.setText(mValues.get(position).getDescription());
 //        holder.mBarcodeView.setText(mValues.get(position).getBarcode());
@@ -60,7 +74,7 @@ public class AllergyProductItemRecyclerViewAdapter extends RecyclerView.Adapter<
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
+//        public final TextView mIdView;
         public final TextView mTitleView;
         public final TextView mDescriptionView;
 //        public final TextView mBarcodeView;
@@ -70,7 +84,7 @@ public class AllergyProductItemRecyclerViewAdapter extends RecyclerView.Adapter<
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.id);
+//            mIdView = (TextView) view.findViewById(R.id.id);
             mTitleView = (TextView) view.findViewById(R.id.title);
             mDescriptionView = (TextView) view.findViewById(R.id.description);
 //            mBarcodeView = (TextView) view.findViewById(R.id.barcode);

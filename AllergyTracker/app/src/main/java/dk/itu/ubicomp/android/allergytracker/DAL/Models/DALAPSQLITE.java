@@ -55,13 +55,20 @@ public class DALAPSQLITE implements IDAL<AllergyProduct> {
     }
 
     @Override
-    public void remove(int id) {
-
+    public void remove(Long id) {
+        database.delete(AllergyProductReaderDbHelper.TABLE_ALLERGYPRODUCT, AllergyProductReaderDbHelper.COLUMN_NAME_ENTRY_ID + "=" + id, null);
     }
 
     @Override
     public void update(AllergyProduct item) {
+        ContentValues values = new ContentValues();
+        values.put(AllergyProductReaderDbHelper.COLUMN_NAME_TITLE, item.getTitle());
+        values.put(AllergyProductReaderDbHelper.COLUMN_NAME_DESCRIPTION, item.getDescription());
+        values.put(AllergyProductReaderDbHelper.COLUMN_NAME_BARCODE, item.getBarcode());
 
+        database.update(AllergyProductReaderDbHelper.TABLE_ALLERGYPRODUCT, values,
+                AllergyProductReaderDbHelper.COLUMN_NAME_ENTRY_ID + "=" + item.getId(),
+                null);
     }
 
     @Override
