@@ -10,8 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import dk.itu.ubicomp.android.allergytracker.dummy.DummyContent;
-import dk.itu.ubicomp.android.allergytracker.dummy.DummyContent.DummyItem;
+import dk.itu.ubicomp.android.allergytracker.DAL.Models.AllergyProduct;
+import dk.itu.ubicomp.android.allergytracker.DAL.Models.AllergyProductDb;
 
 /**
  * A fragment representing a list of Items.
@@ -26,6 +26,8 @@ public class AllergyProductItemFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
+
+    private RecyclerView recyclerView;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -61,17 +63,23 @@ public class AllergyProductItemFragment extends Fragment {
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
+            recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new AllergyProductItemRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            recyclerView.setAdapter(new AllergyProductItemRecyclerViewAdapter(AllergyProductDb.getInstance(getActivity()).getItems(), mListener));
         }
         return view;
     }
 
+//    @Override
+//    public void onResume()
+//    {
+//        super.onResume();
+//        recyclerView.getAdapter().notifyDataSetChanged();
+//    }
 
     @Override
     public void onAttach(Context context) {
@@ -102,6 +110,6 @@ public class AllergyProductItemFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(AllergyProduct item);
     }
 }

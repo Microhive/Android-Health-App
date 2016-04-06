@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AllergyTracker</string>
+    <string name="app_name">Allergy Tracker</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_create_allergy">CreateAllergyActivity</string>
     <string name="ok">OK</string>

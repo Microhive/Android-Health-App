@@ -12,7 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import dk.itu.ubicomp.android.allergytracker.dummy.DummyContent;
+import dk.itu.ubicomp.android.allergytracker.DAL.Models.AllergyProduct;
 
 public class MainActivity extends AppCompatActivity implements AllergyProductItemFragment.OnListFragmentInteractionListener {
 
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements AllergyProductIte
     }
 
     @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+    public void onListFragmentInteraction(AllergyProduct item) {
         Toast.makeText(this, "Hey", Toast.LENGTH_SHORT).show();
     }
 }

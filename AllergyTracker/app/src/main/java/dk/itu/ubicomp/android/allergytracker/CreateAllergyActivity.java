@@ -14,6 +14,9 @@ import android.widget.TextView;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.barcode.Barcode;
 
+import dk.itu.ubicomp.android.allergytracker.DAL.Models.AllergyProduct;
+import dk.itu.ubicomp.android.allergytracker.DAL.Models.AllergyProductDb;
+
 public class CreateAllergyActivity extends AppCompatActivity implements View.OnClickListener{
 
     // use a compound button so either checkbox or switch widgets work.
@@ -37,6 +40,13 @@ public class CreateAllergyActivity extends AppCompatActivity implements View.OnC
         useFlash = (CompoundButton) findViewById(R.id.use_flash);
 
         findViewById(R.id.read_barcode).setOnClickListener(this);
+
+        AllergyProduct item = new AllergyProduct();
+        item.setTitle("title");
+        item.setDescription("description");
+        item.setBarcode("123");
+
+        AllergyProductDb.getInstance(this).create(item);
     }
 
     /**
