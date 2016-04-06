@@ -10,6 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.Collections;
+import java.util.List;
+
 import dk.itu.ubicomp.android.allergytracker.DAL.Models.AllergyProduct;
 import dk.itu.ubicomp.android.allergytracker.DAL.Models.AllergyProductDb;
 
@@ -69,7 +72,10 @@ public class AllergyProductItemFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new AllergyProductItemRecyclerViewAdapter(AllergyProductDb.getInstance(getActivity()).getItems(), mListener));
+            List<AllergyProduct> list = AllergyProductDb.getInstance(getActivity()).getItems();
+            List<AllergyProduct> shallowCopy = list.subList(0, list.size());
+            Collections.reverse(shallowCopy);
+            recyclerView.setAdapter(new AllergyProductItemRecyclerViewAdapter(shallowCopy, mListener));
         }
         return view;
     }
