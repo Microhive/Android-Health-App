@@ -32,8 +32,7 @@ public class MainCRUDActivity extends AppCompatActivity implements View.OnClickL
         descriptionTextView.setText(mAllergyProduct.getDescription().toString());
         barcodeTextView.setText(mAllergyProduct.getBarcode().toString());
 
-        findViewById(R.id.read_barcode).setOnClickListener(this);
-        findViewById(R.id.save_button).setOnClickListener(this);
+        findViewById(R.id.update_button).setOnClickListener(this);
     }
 
     /**
