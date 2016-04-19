@@ -5,24 +5,21 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.barcode.Barcode;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import dk.itu.ubicomp.android.allergytracker.DAL.Models.AllergyProduct;
 
 public class MainActivity extends AppCompatActivity implements AllergyProductItemFragment.OnListFragmentInteractionListener {
+
+    private static final int RC_BARCODE_CAPTURE = 9001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +53,13 @@ public class MainActivity extends AppCompatActivity implements AllergyProductIte
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_barcode_scan) {
+
+            // launch barcode activity.
+            Intent intent = new Intent(this, BarcodeCaptureActivity.class);
+            intent.putExtra(BarcodeCaptureActivity.AutoFocus, true);
+            intent.putExtra(BarcodeCaptureActivity.UseFlash, false);
+            startActivityForResult(intent, RC_BARCODE_CAPTURE);
+
             return true;
         }
 
@@ -68,5 +72,34 @@ public class MainActivity extends AppCompatActivity implements AllergyProductIte
         Intent intent = new Intent(MainActivity.this, MainCRUDActivity.class);
         intent.putExtra("ALLERGYITEM", item);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == RC_BARCODE_CAPTURE) {
+            if (resultCode == CommonStatusCodes.SUCCESS) {
+                if (data != null) {
+                    Barcode barcode = data.getParcelableExtra(BarcodeCaptureActivity.BarcodeObject);
+                    Log.d("SCANNING FROM MAIN", "Barcode read: " + barcode.displayValue);
+
+                    AllergyProductItemFragment fragment = (AllergyProductItemFragment) getFragmentManager().findFragmentById(R.id.fragment_container);
+                    fragment.setQueryText(barcode.displayValue);
+
+                } else {
+                    Log.d("SCANNING FROM MAIN", "No barcode captured, intent data is null");
+
+                    AllergyProductItemFragment fragment = (AllergyProductItemFragment) getFragmentManager().findFragmentById(R.id.fragment_container);
+                    fragment.setQueryText("NO BARCODE");
+                }
+            } else {
+                Toast.makeText(this, R.string.barcode_error, Toast.LENGTH_SHORT);
+
+                AllergyProductItemFragment fragment = (AllergyProductItemFragment) getFragmentManager().findFragmentById(R.id.fragment_container);
+                fragment.setQueryText("ERROR");
+            }
+        }
+        else{
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }
