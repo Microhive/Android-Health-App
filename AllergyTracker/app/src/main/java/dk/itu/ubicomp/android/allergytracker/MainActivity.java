@@ -9,14 +9,20 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuInflater;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.common.api.CommonStatusCodes;
+import com.google.android.gms.vision.barcode.Barcode;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import dk.itu.ubicomp.android.allergytracker.DAL.Models.AllergyProduct;
 
-public class MainActivity extends AppCompatActivity implements AllergyProductItemFragment.OnListFragmentInteractionListener, SearchView.OnQueryTextListener {
+public class MainActivity extends AppCompatActivity implements AllergyProductItemFragment.OnListFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements AllergyProductIte
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        AllergyProductItemFragment fragment;
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -35,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements AllergyProductIte
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        AllergyProductItemFragment fragment = new AllergyProductItemFragment();
+        fragment = new AllergyProductItemFragment();
         fragmentTransaction.add(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
     }
@@ -48,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements AllergyProductIte
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_barcode_scan) {
             return true;
         }
 
@@ -61,25 +68,5 @@ public class MainActivity extends AppCompatActivity implements AllergyProductIte
         Intent intent = new Intent(MainActivity.this, MainCRUDActivity.class);
         intent.putExtra("ALLERGYITEM", item);
         startActivity(intent);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        final MenuItem item = menu.findItem(R.id.action_search);
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
-        searchView.setOnQueryTextListener(this);
-        return true;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String query) {
-        // Here is where we are going to implement our filter logic
-        return false;
-    }
-
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        return false;
     }
 }

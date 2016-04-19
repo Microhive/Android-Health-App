@@ -48,4 +48,9 @@ public class AllergyProduct implements Serializable {
     public String toString() {
         return title;
     }
+
+    public String getText()
+    {
+        return getTitle() + "," + getDescription() + "," + getBarcode();
+    }
 }

@@ -3,14 +3,19 @@ package dk.itu.ubicomp.android.allergytracker;
 import android.content.Context;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -23,7 +28,7 @@ import dk.itu.ubicomp.android.allergytracker.DAL.Models.AllergyProductDb;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class AllergyProductItemFragment extends Fragment {
+public class AllergyProductItemFragment extends Fragment implements SearchView.OnQueryTextListener{
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -31,7 +36,9 @@ public class AllergyProductItemFragment extends Fragment {
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
 
-    private RecyclerView recyclerView;
+    private List<AllergyProduct> mModels;
+    private RecyclerView mRecyclerView;
+    private AllergyProductItemRecyclerViewAdapter mAdapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -64,29 +71,51 @@ public class AllergyProductItemFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_allergyproductitem_list, container, false);
 
-        // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount, GridLayoutManager.VERTICAL, false));
-            }
-            recyclerView.setHasFixedSize(true);
-            List<AllergyProduct> list = AllergyProductDb.getInstance(getActivity()).getItems();
-            List<AllergyProduct> shallowCopy = list.subList(0, list.size());
-            Collections.reverse(shallowCopy);
-            recyclerView.setAdapter(new AllergyProductItemRecyclerViewAdapter(getActivity(), shallowCopy, mListener));
-        }
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.list);
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setHasOptionsMenu(true);
+
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        mModels = getModels();
+        mRecyclerView.setHasFixedSize(true);
+        mAdapter = new AllergyProductItemRecyclerViewAdapter(getActivity(), mModels, mListener);
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_main, menu);
+
+        final MenuItem item = menu.findItem(R.id.action_search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+        searchView.setOnQueryTextListener(this);
     }
 
     @Override
     public void onResume()
     {
         super.onResume();
-        ((AllergyProductItemRecyclerViewAdapter)recyclerView.getAdapter()).reloadAdapterListFromSource();
+//        updateModels();
+    }
+
+    public List<AllergyProduct> getModels()
+    {
+        return AllergyProductDb.getInstance(getActivity()).getItems();
+    }
+
+    public void updateModels()
+    {
+        if (mRecyclerView == null)
+            return;
+
+        ((AllergyProductItemRecyclerViewAdapter) mRecyclerView.getAdapter()).setModels(getModels());
+        (mRecyclerView.getAdapter()).notifyDataSetChanged();
     }
 
     @Override
@@ -95,8 +124,7 @@ public class AllergyProductItemFragment extends Fragment {
         if (context instanceof OnListFragmentInteractionListener) {
             mListener = (OnListFragmentInteractionListener) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnListFragmentInteractionListener");
+            throw new RuntimeException(context.toString() + " must implement OnListFragmentInteractionListener");
         }
     }
 
@@ -119,5 +147,32 @@ public class AllergyProductItemFragment extends Fragment {
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
         void onListFragmentInteraction(AllergyProduct item);
+    }
+
+    @Override
+    public boolean onQueryTextChange(String query) {
+        // Here is where we are going to implement our filter logic
+        final List<AllergyProduct> filteredModelList = filter(getModels(), query);
+        mAdapter.animateTo(filteredModelList);
+        mRecyclerView.scrollToPosition(0);
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    private List<AllergyProduct> filter(List<AllergyProduct> models, String query) {
+        query = query.toLowerCase();
+
+        final List<AllergyProduct> filteredModelList = new ArrayList<>();
+        for (AllergyProduct model : models) {
+            final String text = model.getText().toLowerCase();
+            if (text.contains(query)) {
+                filteredModelList.add(model);
+            }
+        }
+        return filteredModelList;
     }
 }

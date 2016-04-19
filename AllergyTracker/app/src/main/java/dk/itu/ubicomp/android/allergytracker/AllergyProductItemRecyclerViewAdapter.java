@@ -9,9 +9,7 @@ import android.widget.TextView;
 
 import dk.itu.ubicomp.android.allergytracker.AllergyProductItemFragment.OnListFragmentInteractionListener;
 import dk.itu.ubicomp.android.allergytracker.DAL.Models.AllergyProduct;
-import dk.itu.ubicomp.android.allergytracker.DAL.Models.AllergyProductDb;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -21,23 +19,18 @@ import java.util.List;
  */
 public class AllergyProductItemRecyclerViewAdapter extends RecyclerView.Adapter<AllergyProductItemRecyclerViewAdapter.ViewHolder> {
 
-    private final List<AllergyProduct> mValues;
+    private final List<AllergyProduct> mModels;
     private final OnListFragmentInteractionListener mListener;
     private Context context;
 
     public AllergyProductItemRecyclerViewAdapter(Context context, List<AllergyProduct> items, OnListFragmentInteractionListener listener) {
-        mValues = items;
+        mModels = items;
         mListener = listener;
     }
 
-    public void reloadAdapterListFromSource()
-    {
-        mValues.clear();
-        List<AllergyProduct> list = AllergyProductDb.getInstance(context).getItems();
-        List<AllergyProduct> shallowCopy = list.subList(0, list.size());
-        Collections.reverse(shallowCopy);
-        mValues.addAll(shallowCopy);
-        this.notifyDataSetChanged();
+    public void setModels(List<AllergyProduct> models) {
+        mModels.clear();
+        mModels.addAll(models);
     }
 
     @Override
@@ -49,11 +42,11 @@ public class AllergyProductItemRecyclerViewAdapter extends RecyclerView.Adapter<
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-//        holder.mIdView.setText(mValues.get(position).getId().toString());
-        holder.mTitleView.setText(mValues.get(position).getTitle());
-        holder.mDescriptionView.setText(mValues.get(position).getDescription());
-//        holder.mBarcodeView.setText(mValues.get(position).getBarcode());
+        holder.mItem = mModels.get(position);
+//        holder.mIdView.setText(mModels.get(position).getId().toString());
+        holder.mTitleView.setText(mModels.get(position).getTitle());
+        holder.mDescriptionView.setText(mModels.get(position).getDescription());
+//        holder.mBarcodeView.setText(mModels.get(position).getBarcode());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +62,7 @@ public class AllergyProductItemRecyclerViewAdapter extends RecyclerView.Adapter<
 
     @Override
     public int getItemCount() {
-        return mValues.size();
+        return mModels.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -94,5 +87,56 @@ public class AllergyProductItemRecyclerViewAdapter extends RecyclerView.Adapter<
         public String toString() {
             return super.toString() + " '" + mTitleView.getText() + "'";
         }
+    }
+
+    public void animateTo(List<AllergyProduct> models) {
+        applyAndAnimateRemovals(models);
+        applyAndAnimateAdditions(models);
+        applyAndAnimateMovedItems(models);
+    }
+
+    private void applyAndAnimateRemovals(List<AllergyProduct> newModels) {
+        for (int i = mModels.size() - 1; i >= 0; i--) {
+            final AllergyProduct model = mModels.get(i);
+            if (!newModels.contains(model)) {
+                removeItem(i);
+            }
+        }
+    }
+
+    private void applyAndAnimateAdditions(List<AllergyProduct> newModels) {
+        for (int i = 0, count = newModels.size(); i < count; i++) {
+            final AllergyProduct model = newModels.get(i);
+            if (!mModels.contains(model)) {
+                addItem(i, model);
+            }
+        }
+    }
+
+    private void applyAndAnimateMovedItems(List<AllergyProduct> newModels) {
+        for (int toPosition = newModels.size() - 1; toPosition >= 0; toPosition--) {
+            final AllergyProduct model = newModels.get(toPosition);
+            final int fromPosition = mModels.indexOf(model);
+            if (fromPosition >= 0 && fromPosition != toPosition) {
+                moveItem(fromPosition, toPosition);
+            }
+        }
+    }
+
+    public AllergyProduct removeItem(int position) {
+        final AllergyProduct model = mModels.remove(position);
+        notifyItemRemoved(position);
+        return model;
+    }
+
+    public void addItem(int position, AllergyProduct model) {
+        mModels.add(position, model);
+        notifyItemInserted(position);
+    }
+
+    public void moveItem(int fromPosition, int toPosition) {
+        final AllergyProduct model = mModels.remove(fromPosition);
+        mModels.add(toPosition, model);
+        notifyItemMoved(fromPosition, toPosition);
     }
 }
