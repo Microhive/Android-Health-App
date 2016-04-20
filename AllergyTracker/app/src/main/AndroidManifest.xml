@@ -40,6 +40,12 @@
             android:label="Read Barcode"/>
         <activity android:name=".Activities.MainCRUDActivity">
         </activity>
+
+        <service
+            android:name=".Services.DALService"
+            android:enabled="true"
+            android:exported="false">
+        </service>
     </application>
 
 </manifest>

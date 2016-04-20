@@ -21,7 +21,7 @@ public class CreateAllergyActivity extends AppCompatActivity implements View.OnC
     // use a compound button so either checkbox or switch widgets work.
     private CompoundButton autoFocus;
     private CompoundButton useFlash;
-    private TextView statusMessage;
+//    private TextView statusMessage;
     private TextView titleTextView;
     private TextView descriptionTextView;
     private TextView barcodeTextView;
@@ -35,7 +35,7 @@ public class CreateAllergyActivity extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_allergy_create);
 
-        statusMessage = (TextView)findViewById(R.id.status_message);
+//        statusMessage = (TextView)findViewById(R.id.status_message);
         titleTextView = (TextView)findViewById(R.id.title_value);
         descriptionTextView = (TextView)findViewById(R.id.description_value);
         barcodeTextView = (TextView)findViewById(R.id.barcode_value);
@@ -120,16 +120,16 @@ public class CreateAllergyActivity extends AppCompatActivity implements View.OnC
             if (resultCode == CommonStatusCodes.SUCCESS) {
                 if (data != null) {
                     Barcode barcode = data.getParcelableExtra(BarcodeCaptureActivity.BarcodeObject);
-                    statusMessage.setText(R.string.barcode_success);
+//                    statusMessage.setText(R.string.barcode_success);
                     barcodeTextView.setText(barcode.displayValue);
                     Log.d(TAG, "Barcode read: " + barcode.displayValue);
                 } else {
-                    statusMessage.setText(R.string.barcode_failure);
+//                    statusMessage.setText(R.string.barcode_failure);
                     Log.d(TAG, "No barcode captured, intent data is null");
                 }
             } else {
-                statusMessage.setText(String.format(getString(R.string.barcode_error),
-                        CommonStatusCodes.getStatusCodeString(resultCode)));
+//                statusMessage.setText(String.format(getString(R.string.barcode_error),
+//                        CommonStatusCodes.getStatusCodeString(resultCode)));
             }
         }
         else {
