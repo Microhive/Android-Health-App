@@ -1,4 +1,4 @@
-package dk.itu.ubicomp.android.allergytracker;
+package dk.itu.ubicomp.android.allergytracker.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,8 +11,10 @@ import android.widget.TextView;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.barcode.Barcode;
 
+import dk.itu.ubicomp.android.allergytracker.BarCode.BarcodeCaptureActivity;
 import dk.itu.ubicomp.android.allergytracker.DAL.Models.AllergyProduct;
 import dk.itu.ubicomp.android.allergytracker.DAL.Models.AllergyProductDb;
+import dk.itu.ubicomp.android.allergytracker.R;
 
 public class CreateAllergyActivity extends AppCompatActivity implements View.OnClickListener{
 

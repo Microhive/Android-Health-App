@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package dk.itu.ubicomp.android.allergytracker;
+package dk.itu.ubicomp.android.allergytracker.BarCode;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -42,6 +42,8 @@ import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.CommonStatusCodes;
+
+import dk.itu.ubicomp.android.allergytracker.R;
 import dk.itu.ubicomp.android.allergytracker.camera.CameraSource;
 import dk.itu.ubicomp.android.allergytracker.camera.CameraSourcePreview;
 import dk.itu.ubicomp.android.allergytracker.camera.GraphicOverlay;

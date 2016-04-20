@@ -1,4 +1,4 @@
-package dk.itu.ubicomp.android.allergytracker;
+package dk.itu.ubicomp.android.allergytracker.Activities;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -15,7 +15,9 @@ import android.widget.Toast;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.barcode.Barcode;
 
+import dk.itu.ubicomp.android.allergytracker.BarCode.BarcodeCaptureActivity;
 import dk.itu.ubicomp.android.allergytracker.DAL.Models.AllergyProduct;
+import dk.itu.ubicomp.android.allergytracker.R;
 
 public class MainActivity extends AppCompatActivity implements AllergyProductItemFragment.OnListFragmentInteractionListener {
 
@@ -89,7 +91,6 @@ public class MainActivity extends AppCompatActivity implements AllergyProductIte
                     Log.d("SCANNING FROM MAIN", "No barcode captured, intent data is null");
 
                     AllergyProductItemFragment fragment = (AllergyProductItemFragment) getFragmentManager().findFragmentById(R.id.fragment_container);
-                    fragment.setQueryText("NO BARCODE");
                 }
             } else {
                 Toast.makeText(this, R.string.barcode_error, Toast.LENGTH_SHORT);

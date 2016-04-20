@@ -9,7 +9,7 @@ import android.content.ContentValues;
 import java.util.ArrayList;
 import java.util.List;
 
-import dk.itu.ubicomp.android.allergytracker.AllergyProductReaderDbHelper;
+import dk.itu.ubicomp.android.allergytracker.Activities.AllergyProductReaderDbHelper;
 
 /**
  * Created by Eiler on 06/04/2016.

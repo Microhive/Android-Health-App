@@ -10,5 +10,6 @@
     android:scrollbars="vertical"
     android:fadeScrollbars="true"
     app:layoutManager="LinearLayoutManager"
-    tools:context="dk.itu.ubicomp.android.allergytracker.AllergyProductItemFragment"
-    tools:listitem="@layout/fragment_allergyproductitem"/>
+    tools:context=".Activities.AllergyProductItemFragment"
+    tools:listitem="@layout/fragment_allergyproductitem"
+    />

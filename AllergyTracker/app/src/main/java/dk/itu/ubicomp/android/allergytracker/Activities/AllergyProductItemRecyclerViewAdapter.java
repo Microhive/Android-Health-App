@@ -1,14 +1,16 @@
-package dk.itu.ubicomp.android.allergytracker;
+package dk.itu.ubicomp.android.allergytracker.Activities;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import dk.itu.ubicomp.android.allergytracker.AllergyProductItemFragment.OnListFragmentInteractionListener;
+import dk.itu.ubicomp.android.allergytracker.Activities.AllergyProductItemFragment.OnListFragmentInteractionListener;
 import dk.itu.ubicomp.android.allergytracker.DAL.Models.AllergyProduct;
+import dk.itu.ubicomp.android.allergytracker.R;
 
 import java.util.List;
 
@@ -43,17 +45,13 @@ public class AllergyProductItemRecyclerViewAdapter extends RecyclerView.Adapter<
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mModels.get(position);
-//        holder.mIdView.setText(mModels.get(position).getId().toString());
         holder.mTitleView.setText(mModels.get(position).getTitle());
         holder.mDescriptionView.setText(mModels.get(position).getDescription());
-//        holder.mBarcodeView.setText(mModels.get(position).getBarcode());
-
+        holder.mImgThumbnail.setImageResource(R.drawable.stockfood_grayscaley);
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
                     mListener.onListFragmentInteraction(holder.mItem);
                 }
             }
@@ -67,20 +65,18 @@ public class AllergyProductItemRecyclerViewAdapter extends RecyclerView.Adapter<
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-//        public final TextView mIdView;
         public final TextView mTitleView;
         public final TextView mDescriptionView;
-//        public final TextView mBarcodeView;
+        public final ImageView mImgThumbnail;
 
         public AllergyProduct mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-//            mIdView = (TextView) view.findViewById(R.id.id);
             mTitleView = (TextView) view.findViewById(R.id.title);
             mDescriptionView = (TextView) view.findViewById(R.id.description);
-//            mBarcodeView = (TextView) view.findViewById(R.id.barcode);
+            mImgThumbnail = (ImageView)itemView.findViewById(R.id.img_thumbnail);
         }
 
         @Override

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package dk.itu.ubicomp.android.allergytracker;
+package dk.itu.ubicomp.android.allergytracker.BarCode;
 
 import android.graphics.Canvas;
 import android.graphics.Color;

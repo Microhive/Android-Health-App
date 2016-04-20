@@ -1,10 +1,9 @@
-package dk.itu.ubicomp.android.allergytracker;
+package dk.itu.ubicomp.android.allergytracker.Activities;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -16,11 +15,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import dk.itu.ubicomp.android.allergytracker.DAL.Models.AllergyProduct;
 import dk.itu.ubicomp.android.allergytracker.DAL.Models.AllergyProductDb;
+import dk.itu.ubicomp.android.allergytracker.R;
 
 /**
  * A fragment representing a list of Items.

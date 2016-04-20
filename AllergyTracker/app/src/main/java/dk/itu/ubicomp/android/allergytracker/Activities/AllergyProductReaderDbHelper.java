@@ -1,4 +1,4 @@
-package dk.itu.ubicomp.android.allergytracker;
+package dk.itu.ubicomp.android.allergytracker.Activities;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

@@ -1,4 +1,4 @@
-package dk.itu.ubicomp.android.allergytracker;
+package dk.itu.ubicomp.android.allergytracker.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import dk.itu.ubicomp.android.allergytracker.DAL.Models.AllergyProduct;
 import dk.itu.ubicomp.android.allergytracker.DAL.Models.AllergyProductDb;
+import dk.itu.ubicomp.android.allergytracker.R;
 
 public class MainCRUDActivity extends AppCompatActivity implements View.OnClickListener{
 
