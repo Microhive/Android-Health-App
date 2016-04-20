@@ -102,7 +102,7 @@ public class AllergyProductItemFragment extends Fragment implements SearchView.O
     public void onResume()
     {
         super.onResume();
-//        updateModels();
+        updateModels();
     }
 
     public List<AllergyProduct> getModels()
