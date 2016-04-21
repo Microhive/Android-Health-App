@@ -68,13 +68,13 @@ public class CreateAllergyActivity extends AppCompatActivity implements View.OnC
             Boolean fieldsAreOK = true;
             if (titleTextView.getText().toString().trim().equals(""))
             {
-                titleTextView.setError("Title is required!");
+                titleTextView.setError(getString(R.string.activity_allergy_create_title_required));
                 fieldsAreOK = false;
             }
 
             if (barcodeTextView.getText().toString().trim().equals(""))
             {
-                barcodeTextView.setError("Barcode is required!");
+                barcodeTextView.setError(getString(R.string.activity_allergy_create_barcode_required));
                 fieldsAreOK = false;
             }
 
@@ -120,11 +120,9 @@ public class CreateAllergyActivity extends AppCompatActivity implements View.OnC
             if (resultCode == CommonStatusCodes.SUCCESS) {
                 if (data != null) {
                     Barcode barcode = data.getParcelableExtra(BarcodeCaptureActivity.BarcodeObject);
-//                    statusMessage.setText(R.string.barcode_success);
                     barcodeTextView.setText(barcode.displayValue);
                     Log.d(TAG, "Barcode read: " + barcode.displayValue);
                 } else {
-//                    statusMessage.setText(R.string.barcode_failure);
                     Log.d(TAG, "No barcode captured, intent data is null");
                 }
             } else {

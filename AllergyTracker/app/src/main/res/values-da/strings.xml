@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Allergy Tracker</string>
+    <string name="title_activity_create_allergy">CreateAllergyActivity</string>
+    <string name="ok">OK</string>
+    <string name="permission_camera_rationale">Der er behov for adgang til kameraet for læsning</string>
+    <string name="no_camera_permission"> Dette program kan ikke køre, fordi det ikke har kameraet tilladelse. Applikationen vil nu afslutte.</string>
+    <string name="low_storage_error">Face detector dependencies cannot be downloaded due to low device storage</string>
+    <string name="title_activity_main">Barcode Reader Sample</string>
+    <string name="barcode_header">Click &quot;Read Barcode&quot; to read a barcode</string>
+    <string name="read_barcode">Læs strejkode</string>
+    <string name="auto_focus">Fokuser kamera automatiskt</string>
+    <string name="use_flash">Brug kamera lys</string>
+    <string name="barcode_success">Strejkode blev læst</string>
+    <string name="barcode_failure">No barcode captured</string>
+    <string name="barcode_error">"Error reading barcode: %1$s"</string>
+    <string name="action_search">søg</string>
+    <string name="action_barcode_scan">Skan strejkode</string>
+    <string name="activity_allergy_create_barcode">strejkode</string>
+    <string name="activity_allergy_create_save_product">Gem</string>
+    <string name="activity_allergy_create_description">produkt beskrivelse</string>
+    <string name="activity_allergy_create_title">overskrift</string>
+    <string name="add_new_product">Tilføje nyt produkt</string>
+    <string name="activity_allergy_create_barcode_required">Barcode er nødvendig!</string>
+    <string name="activity_allergy_create_description_required">Beskrivelse er nødvendig!</string>
+    <string name="activity_allergy_create_title_required">Overskrift er nødvendig!</string>
+</resources>

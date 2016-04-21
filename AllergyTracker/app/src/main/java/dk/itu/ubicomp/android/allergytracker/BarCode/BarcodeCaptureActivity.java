@@ -71,6 +71,7 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
     public static final String AutoFocus = "AutoFocus";
     public static final String UseFlash = "UseFlash";
     public static final String BarcodeObject = "Barcode";
+    public static final String PictureObject = "Picture";
 
     private CameraSource mCameraSource;
     private CameraSourcePreview mPreview;
@@ -343,6 +344,7 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
             if (barcode != null) {
                 Intent data = new Intent();
                 data.putExtra(BarcodeObject, barcode);
+                data.putExtra(PictureObject, mGraphicOverlay.getDrawingCache());
                 setResult(CommonStatusCodes.SUCCESS, data);
                 finish();
             }
