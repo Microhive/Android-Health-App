@@ -20,7 +20,7 @@
     <string name="activity_allergy_create_description">produkt beskrivelse</string>
     <string name="activity_allergy_create_title">overskrift</string>
     <string name="add_new_product">Tilføje nyt produkt</string>
-    <string name="activity_allergy_create_barcode_required">Barcode er nødvendig!</string>
+    <string name="activity_allergy_create_barcode_required">Strejkode er nødvendig!</string>
     <string name="activity_allergy_create_description_required">Beskrivelse er nødvendig!</string>
     <string name="activity_allergy_create_title_required">Overskrift er nødvendig!</string>
 </resources>
