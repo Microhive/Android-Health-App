@@ -25,6 +25,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
@@ -51,6 +55,7 @@ import com.google.android.gms.vision.MultiProcessor;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 /**
@@ -343,8 +348,16 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
             barcode = graphic.getBarcode();
             if (barcode != null) {
                 Intent data = new Intent();
+
+                GraphicOverlay<BarcodeGraphic> view = ((GraphicOverlay<BarcodeGraphic>) findViewById(R.id.graphicOverlay));
+//                CameraSourcePreview view = (CameraSourcePreview) findViewById(R.id.preview);
+                Bitmap bitmap = loadBitmapFromView(view, view.getWidth(), view.getHeight());
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, bos);
+                byte[] bArray = bos.toByteArray();
+
+                data.putExtra(PictureObject, bArray);
                 data.putExtra(BarcodeObject, barcode);
-                data.putExtra(PictureObject, mGraphicOverlay.getDrawingCache());
                 setResult(CommonStatusCodes.SUCCESS, data);
                 finish();
             }
@@ -356,6 +369,14 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
             Log.d(TAG,"no barcode detected");
         }
         return barcode != null;
+    }
+
+    public static Bitmap loadBitmapFromView(View v, int width, int height) {
+        Bitmap b = Bitmap.createBitmap(width , height, Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas(b);
+        v.layout(0, 0, v.getLayoutParams().width, v.getLayoutParams().height);
+        v.draw(c);
+        return b;
     }
 
     private class CaptureGestureListener extends GestureDetector.SimpleOnGestureListener {
@@ -384,6 +405,7 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
          */
         @Override
         public boolean onScale(ScaleGestureDetector detector) {
+            mCameraSource.doZoom(detector.getScaleFactor());
             return false;
         }
 
