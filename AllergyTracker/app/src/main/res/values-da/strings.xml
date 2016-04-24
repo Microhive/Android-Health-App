@@ -15,12 +15,18 @@
     <string name="barcode_error">"Error reading barcode: %1$s"</string>
     <string name="action_search">søg</string>
     <string name="action_barcode_scan">Skan strejkode</string>
-    <string name="activity_allergy_create_barcode">strejkode</string>
+    <string name="activity_allergy_barcode">strejkode</string>
     <string name="activity_allergy_create_save_product">Gem</string>
-    <string name="activity_allergy_create_description">produkt beskrivelse</string>
-    <string name="activity_allergy_create_title">overskrift</string>
+    <string name="activity_allergy_description">produkt beskrivelse</string>
+    <string name="activity_allergy_title">overskrift</string>
     <string name="add_new_product">Tilføje nyt produkt</string>
-    <string name="activity_allergy_create_barcode_required">Strejkode er nødvendig!</string>
-    <string name="activity_allergy_create_description_required">Beskrivelse er nødvendig!</string>
-    <string name="activity_allergy_create_title_required">Overskrift er nødvendig!</string>
+    <string name="activity_allergy_barcode_required">Strejkode er nødvendig!</string>
+    <string name="activity_allergy_description_required">Beskrivelse er nødvendig!</string>
+    <string name="activity_allergy_title_required">Overskrift er nødvendig!</string>
+    <string name="activity_allergy_delete">Slet</string>
+    <string name="activity_allergy_update">Opdater</string>
+    <string name="activity_allergy_barcode_is_duplicate_required">Produkt med stregkode findes allerede. Må være unik!</string>
+    <string name="cancel">annuler</string>
+    <string name="dialog_create_message">Produkt med stregkode findes allerede! Ønsker du at åbne eksisterende produkt?</string>
+    <string name="dialog_create_title">Produkt findes!</string>
 </resources>

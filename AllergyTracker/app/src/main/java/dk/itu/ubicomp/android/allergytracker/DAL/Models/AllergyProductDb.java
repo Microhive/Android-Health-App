@@ -45,4 +45,22 @@ public class AllergyProductDb {
     public List<AllergyProduct> getItems() {
         return DALDb.getItems();
     }
+
+    public boolean barcodeExists(String barcodeString)
+    {
+        for (AllergyProduct item: getItems()) {
+            if (item.getBarcode().equalsIgnoreCase(barcodeString))
+                return true;
+        }
+        return false;
+    }
+
+    public AllergyProduct getByBarcode(String barcodeString)
+    {
+        for (AllergyProduct item: getItems()) {
+            if (item.getBarcode().equalsIgnoreCase(barcodeString))
+                return item;
+        }
+        return null;
+    }
 }

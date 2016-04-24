@@ -16,11 +16,17 @@
     <string name="action_search">search</string>
     <string name="action_barcode_scan">Scan Barcode</string>
     <string name="add_new_product">Add New Product</string>
-    <string name="activity_allergy_create_title">title</string>
-    <string name="activity_allergy_create_description">description</string>
-    <string name="activity_allergy_create_barcode">barcode</string>
+    <string name="activity_allergy_title">title</string>
+    <string name="activity_allergy_description">description</string>
+    <string name="activity_allergy_barcode">barcode</string>
     <string name="activity_allergy_create_save_product">Save Product</string>
-    <string name="activity_allergy_create_description_required">Description is required!</string>
-    <string name="activity_allergy_create_title_required">Title is required!</string>
-    <string name="activity_allergy_create_barcode_required">Barcode is required!</string>
+    <string name="activity_allergy_description_required">Description is required!</string>
+    <string name="activity_allergy_title_required">Title is required!</string>
+    <string name="activity_allergy_barcode_required">Barcode is required!</string>
+    <string name="activity_allergy_update">Update</string>
+    <string name="activity_allergy_delete">Delete</string>
+    <string name="activity_allergy_barcode_is_duplicate_required">Barcode must be unique!</string>
+    <string name="cancel">cancel</string>
+    <string name="dialog_create_message">Entry with barcode already exists! Want to open existing entry?</string>
+    <string name="dialog_create_title">Entry exists!</string>
 </resources>

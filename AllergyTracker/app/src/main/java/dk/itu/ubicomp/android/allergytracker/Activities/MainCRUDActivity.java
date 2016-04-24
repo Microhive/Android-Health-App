@@ -2,6 +2,7 @@ package dk.itu.ubicomp.android.allergytracker.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -50,13 +51,20 @@ public class MainCRUDActivity extends AppCompatActivity implements View.OnClickL
             Boolean fieldsAreOK = true;
             if (titleTextView.getText().toString().trim().equals(""))
             {
-                titleTextView.setError("Title is required!");
+                titleTextView.setError(getString(R.string.activity_allergy_title_required));
                 fieldsAreOK = false;
             }
 
             if (barcodeTextView.getText().toString().trim().equals(""))
             {
-                barcodeTextView.setError("Barcode is required!");
+                barcodeTextView.setError(getString(R.string.activity_allergy_barcode_required));
+                fieldsAreOK = false;
+            }
+
+            AllergyProduct temp = AllergyProductDb.getInstance(this).getByBarcode(barcodeTextView.getText().toString());
+            if (temp != null && !temp.getId().equals(mAllergyProduct.getId()))
+            {
+                barcodeTextView.setError(getString(R.string.activity_allergy_barcode_is_duplicate_required));
                 fieldsAreOK = false;
             }
 

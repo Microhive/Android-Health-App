@@ -82,7 +82,7 @@
         android:layout_alignParentEnd="true"
         android:maxLength="50"
         android:layout_marginBottom="10dp"
-        android:hint="@string/activity_allergy_create_title"
+        android:hint="@string/activity_allergy_title"
         android:singleLine="true"/>
 
     <EditText
@@ -93,7 +93,7 @@
         android:layout_below="@+id/title_value"
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="10dp"
-        android:hint="@string/activity_allergy_create_description"
+        android:hint="@string/activity_allergy_description"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"/>
 
@@ -101,7 +101,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/barcode_value"
-        android:hint="@string/activity_allergy_create_barcode"
+        android:hint="@string/activity_allergy_barcode"
         android:inputType="none"
         android:singleLine="true"
         android:layout_below="@+id/description_value"

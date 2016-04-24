@@ -2,9 +2,11 @@ package dk.itu.ubicomp.android.allergytracker.Activities;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -16,6 +18,7 @@ import com.google.android.gms.vision.barcode.Barcode;
 
 import dk.itu.ubicomp.android.allergytracker.BarCode.BarcodeCaptureActivity;
 import dk.itu.ubicomp.android.allergytracker.DAL.Models.AllergyProduct;
+import dk.itu.ubicomp.android.allergytracker.DAL.Models.AllergyProductDb;
 import dk.itu.ubicomp.android.allergytracker.R;
 
 public class MainActivity extends AppCompatActivity implements AllergyProductItemFragment.OnListFragmentInteractionListener {
@@ -79,6 +82,14 @@ public class MainActivity extends AppCompatActivity implements AllergyProductIte
 
                     AllergyProductItemFragment fragment = (AllergyProductItemFragment) getFragmentManager().findFragmentById(R.id.fragment_container);
                     fragment.setQueryText(barcode.displayValue);
+
+                    AllergyProduct duplicateEntry = AllergyProductDb.getInstance(this).getByBarcode(barcode.displayValue);
+                    if (duplicateEntry != null)
+                    {
+                        Intent intent = new Intent(MainActivity.this, MainCRUDActivity.class);
+                        intent.putExtra("ALLERGYITEM", duplicateEntry);
+                        startActivity(intent);
+                    }
 
                 } else {
                     Log.d("SCANNING FROM MAIN", "No barcode captured, intent data is null");

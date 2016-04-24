@@ -1,7 +1,9 @@
 package dk.itu.ubicomp.android.allergytracker.Activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -68,13 +70,19 @@ public class CreateAllergyActivity extends AppCompatActivity implements View.OnC
             Boolean fieldsAreOK = true;
             if (titleTextView.getText().toString().trim().equals(""))
             {
-                titleTextView.setError(getString(R.string.activity_allergy_create_title_required));
+                titleTextView.setError(getString(R.string.activity_allergy_title_required));
                 fieldsAreOK = false;
             }
 
-            if (barcodeTextView.getText().toString().trim().equals(""))
+            if (barcodeTextView.getText().toString().equals(""))
             {
-                barcodeTextView.setError(getString(R.string.activity_allergy_create_barcode_required));
+                barcodeTextView.setError(getString(R.string.activity_allergy_barcode_required));
+                fieldsAreOK = false;
+            }
+
+            if (barcodeExists(barcodeTextView.getText().toString()))
+            {
+                barcodeTextView.setError(getString(R.string.activity_allergy_barcode_is_duplicate_required));
                 fieldsAreOK = false;
             }
 
@@ -122,6 +130,7 @@ public class CreateAllergyActivity extends AppCompatActivity implements View.OnC
                     Barcode barcode = data.getParcelableExtra(BarcodeCaptureActivity.BarcodeObject);
                     barcodeTextView.setText(barcode.displayValue);
                     Log.d(TAG, "Barcode read: " + barcode.displayValue);
+                    barcodeExistsPopup(barcode.displayValue);
                 } else {
                     Log.d(TAG, "No barcode captured, intent data is null");
                 }
@@ -133,5 +142,37 @@ public class CreateAllergyActivity extends AppCompatActivity implements View.OnC
         else {
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    private void barcodeExistsPopup(String barcodeString)
+    {
+        final AllergyProduct duplicateEntry = AllergyProductDb.getInstance(this).getByBarcode(barcodeString);
+
+        if (duplicateEntry == null)
+            return;
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setMessage(R.string.dialog_create_message)
+                .setTitle(R.string.dialog_create_title);
+
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                Intent intent = new Intent(CreateAllergyActivity.this, MainCRUDActivity.class);
+                intent.putExtra("ALLERGYITEM", duplicateEntry);
+                startActivity(intent);
+            }
+        });
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+            }
+        });
+        builder.create().show();
+    }
+
+    private boolean barcodeExists(String barcodeString)
+    {
+        return AllergyProductDb.getInstance(this).barcodeExists(barcodeTextView.getText().toString());
     }
 }
