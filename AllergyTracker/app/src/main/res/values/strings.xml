@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Allergy Tracker</string>
+    <string name="app_name">Allergy Products</string>
     <string name="title_activity_create_allergy" translatable="false">CreateAllergyActivity</string>
     <string name="ok">OK</string>
     <string name="permission_camera_rationale">Access to the camera is needed for detection</string>
@@ -29,4 +29,9 @@
     <string name="cancel">cancel</string>
     <string name="dialog_create_message">Entry with barcode already exists! Want to open existing entry?</string>
     <string name="dialog_create_title">Entry exists!</string>
+    <string name="take_picture">Take picture</string>
+
+    <string name="title_activity_camera">CameraActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

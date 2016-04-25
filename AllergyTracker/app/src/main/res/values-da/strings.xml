@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Allergy Tracker</string>
+    <string name="app_name">Allergi Produkter</string>
     <string name="title_activity_create_allergy">CreateAllergyActivity</string>
     <string name="ok">OK</string>
     <string name="permission_camera_rationale">Der er behov for adgang til kameraet for læsning</string>
@@ -29,4 +29,5 @@
     <string name="cancel">annuler</string>
     <string name="dialog_create_message">Produkt med stregkode findes allerede! Ønsker du at åbne eksisterende produkt?</string>
     <string name="dialog_create_title">Produkt findes!</string>
+    <string name="take_picture">Tag billede</string>
 </resources>

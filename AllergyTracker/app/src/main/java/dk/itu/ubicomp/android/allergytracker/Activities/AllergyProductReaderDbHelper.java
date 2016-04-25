@@ -20,22 +20,25 @@ public class AllergyProductReaderDbHelper extends SQLiteOpenHelper {
     public static final String COLUMN_NAME_TITLE = "title";
     public static final String COLUMN_NAME_DESCRIPTION = "description";
     public static final String COLUMN_NAME_BARCODE = "barcode";
+    public static final String COLUMN_NAME_IMAGE = "image";
 
     private static final String TEXT_TYPE = " TEXT";
+    private static final String LONGBLOB_TYPE = " LONGBLOB";
     private static final String COMMA_SEP = ",";
     private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + TABLE_ALLERGYPRODUCT + " (" +
                     COLUMN_NAME_ENTRY_ID + " INTEGER PRIMARY KEY," +
                     COLUMN_NAME_TITLE + TEXT_TYPE + COMMA_SEP +
                     COLUMN_NAME_DESCRIPTION + TEXT_TYPE + COMMA_SEP +
-                    COLUMN_NAME_BARCODE + TEXT_TYPE +
+                    COLUMN_NAME_BARCODE + TEXT_TYPE + COMMA_SEP +
+                    COLUMN_NAME_IMAGE + LONGBLOB_TYPE +
                     " )";
 
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + TABLE_ALLERGYPRODUCT;
 
     // If you change the database schema, you must increment the database version.
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 3;
     public static final String DATABASE_NAME = "AllergyProduct.db";
 
     public AllergyProductReaderDbHelper(Context context) {

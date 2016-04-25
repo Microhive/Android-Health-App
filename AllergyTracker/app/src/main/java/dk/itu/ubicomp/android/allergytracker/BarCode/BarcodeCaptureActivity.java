@@ -28,7 +28,9 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
@@ -76,7 +78,6 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
     public static final String AutoFocus = "AutoFocus";
     public static final String UseFlash = "UseFlash";
     public static final String BarcodeObject = "Barcode";
-    public static final String PictureObject = "Picture";
 
     private CameraSource mCameraSource;
     private CameraSourcePreview mPreview;
@@ -348,15 +349,6 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
             barcode = graphic.getBarcode();
             if (barcode != null) {
                 Intent data = new Intent();
-
-                GraphicOverlay<BarcodeGraphic> view = ((GraphicOverlay<BarcodeGraphic>) findViewById(R.id.graphicOverlay));
-//                CameraSourcePreview view = (CameraSourcePreview) findViewById(R.id.preview);
-                Bitmap bitmap = loadBitmapFromView(view, view.getWidth(), view.getHeight());
-                ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, bos);
-                byte[] bArray = bos.toByteArray();
-
-                data.putExtra(PictureObject, bArray);
                 data.putExtra(BarcodeObject, barcode);
                 setResult(CommonStatusCodes.SUCCESS, data);
                 finish();
@@ -369,14 +361,6 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
             Log.d(TAG,"no barcode detected");
         }
         return barcode != null;
-    }
-
-    public static Bitmap loadBitmapFromView(View v, int width, int height) {
-        Bitmap b = Bitmap.createBitmap(width , height, Bitmap.Config.ARGB_8888);
-        Canvas c = new Canvas(b);
-        v.layout(0, 0, v.getLayoutParams().width, v.getLayoutParams().height);
-        v.draw(c);
-        return b;
     }
 
     private class CaptureGestureListener extends GestureDetector.SimpleOnGestureListener {

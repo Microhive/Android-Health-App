@@ -5,7 +5,10 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.content.ContentValues;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +25,8 @@ public class DALAPSQLITE implements IDAL<AllergyProduct> {
             AllergyProductReaderDbHelper.COLUMN_NAME_ENTRY_ID,
             AllergyProductReaderDbHelper.COLUMN_NAME_TITLE,
             AllergyProductReaderDbHelper.COLUMN_NAME_DESCRIPTION,
-            AllergyProductReaderDbHelper.COLUMN_NAME_BARCODE };
+            AllergyProductReaderDbHelper.COLUMN_NAME_BARCODE,
+            AllergyProductReaderDbHelper.COLUMN_NAME_IMAGE };
 
     public DALAPSQLITE(Context context) {
         dbHelper = new AllergyProductReaderDbHelper(context);
@@ -43,6 +47,7 @@ public class DALAPSQLITE implements IDAL<AllergyProduct> {
         values.put(AllergyProductReaderDbHelper.COLUMN_NAME_TITLE, item.getTitle());
         values.put(AllergyProductReaderDbHelper.COLUMN_NAME_DESCRIPTION, item.getDescription());
         values.put(AllergyProductReaderDbHelper.COLUMN_NAME_BARCODE, item.getBarcode());
+        values.put(AllergyProductReaderDbHelper.COLUMN_NAME_IMAGE, item.getImage());
         long insertId = database.insert(AllergyProductReaderDbHelper.TABLE_ALLERGYPRODUCT, null, values);
         Cursor cursor = database.query(AllergyProductReaderDbHelper.TABLE_ALLERGYPRODUCT,
                 allColumns, AllergyProductReaderDbHelper.COLUMN_NAME_ENTRY_ID + " = " + insertId, null,
@@ -65,6 +70,7 @@ public class DALAPSQLITE implements IDAL<AllergyProduct> {
         values.put(AllergyProductReaderDbHelper.COLUMN_NAME_TITLE, item.getTitle());
         values.put(AllergyProductReaderDbHelper.COLUMN_NAME_DESCRIPTION, item.getDescription());
         values.put(AllergyProductReaderDbHelper.COLUMN_NAME_BARCODE, item.getBarcode());
+        values.put(AllergyProductReaderDbHelper.COLUMN_NAME_IMAGE, item.getImage());
 
         database.update(AllergyProductReaderDbHelper.TABLE_ALLERGYPRODUCT, values,
                 AllergyProductReaderDbHelper.COLUMN_NAME_ENTRY_ID + "=" + item.getId(),
@@ -96,6 +102,7 @@ public class DALAPSQLITE implements IDAL<AllergyProduct> {
         item.setTitle(cursor.getString(1));
         item.setDescription(cursor.getString(2));
         item.setBarcode(cursor.getString(3));
+        item.setImage(cursor.getBlob(4));
         return item;
     }
 }

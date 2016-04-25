@@ -1,5 +1,7 @@
 package dk.itu.ubicomp.android.allergytracker.DAL.Models;
 
+import android.graphics.Bitmap;
+
 import java.io.Serializable;
 
 /**
@@ -11,6 +13,7 @@ public class AllergyProduct implements Serializable {
     private String title;
     private String description;
     private String barcode;
+    private byte[] image;
 
     public Long getId() {
         return id;
@@ -36,12 +39,16 @@ public class AllergyProduct implements Serializable {
         this.description = description;
     }
 
-    public String getBarcode() {
-        return barcode;
-    }
+    public String getBarcode() { return barcode; }
 
     public void setBarcode(String barcode) {
         this.barcode = barcode;
+    }
+
+    public byte[] getImage() { return image; }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     @Override

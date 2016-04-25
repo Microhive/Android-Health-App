@@ -1,6 +1,8 @@
 package dk.itu.ubicomp.android.allergytracker.Activities;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,7 +49,15 @@ public class AllergyProductItemRecyclerViewAdapter extends RecyclerView.Adapter<
         holder.mItem = mModels.get(position);
         holder.mTitleView.setText(mModels.get(position).getTitle());
         holder.mDescriptionView.setText(mModels.get(position).getDescription());
-        holder.mImgThumbnail.setImageResource(R.drawable.stockfood_grayscaley);
+        if (mModels.get(position).getImage() != null)
+        {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(mModels.get(position).getImage(), 0, mModels.get(position).getImage().length);
+            holder.mImgThumbnail.setImageBitmap(bitmap);
+        }
+        else
+        {
+            holder.mImgThumbnail.setImageResource(R.drawable.stockfood_grayscaley);
+        }
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

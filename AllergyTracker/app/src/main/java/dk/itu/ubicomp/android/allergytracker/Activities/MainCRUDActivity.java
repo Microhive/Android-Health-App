@@ -75,6 +75,7 @@ public class MainCRUDActivity extends AppCompatActivity implements View.OnClickL
                 item.setTitle(titleTextView.getText().toString());
                 item.setDescription(descriptionTextView.getText().toString());
                 item.setBarcode(barcodeTextView.getText().toString());
+                item.setImage(mAllergyProduct.getImage());
                 AllergyProductDb.getInstance(this).update(item);
                 this.finish();
             }
