@@ -7,9 +7,9 @@
     <string name="low_storage_error" translatable="false">Face detector dependencies cannot be downloaded due to low device storage</string>
     <string name="title_activity_main" translatable="false">Barcode Reader Sample</string>
     <string name="barcode_header" translatable="false">Click &quot;Read Barcode&quot; to read a barcode</string>
-    <string name="read_barcode">Read Barcode</string>
-    <string name="auto_focus">Auto Focus</string>
-    <string name="use_flash">Use Flash</string>
+    <string name="read_barcode">Read barcode</string>
+    <string name="auto_focus">Auto focus</string>
+    <string name="use_flash">Use flash</string>
     <string name="barcode_success" translatable="false">Barcode read successfully</string>
     <string name="barcode_failure" translatable="false">No barcode captured</string>
     <string name="barcode_error" translatable="false">"Error reading barcode: %1$s"</string>
@@ -19,7 +19,7 @@
     <string name="activity_allergy_title">title</string>
     <string name="activity_allergy_description">description</string>
     <string name="activity_allergy_barcode">barcode</string>
-    <string name="activity_allergy_create_save_product">Save Product</string>
+    <string name="activity_allergy_create_save_product">Save</string>
     <string name="activity_allergy_description_required">Description is required!</string>
     <string name="activity_allergy_title_required">Title is required!</string>
     <string name="activity_allergy_barcode_required">Barcode is required!</string>

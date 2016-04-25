@@ -17,7 +17,7 @@
     <string name="action_barcode_scan">Skan strejkode</string>
     <string name="activity_allergy_barcode">strejkode</string>
     <string name="activity_allergy_create_save_product">Gem</string>
-    <string name="activity_allergy_description">produkt beskrivelse</string>
+    <string name="activity_allergy_description">beskrivelse</string>
     <string name="activity_allergy_title">overskrift</string>
     <string name="add_new_product">Tilføje nyt produkt</string>
     <string name="activity_allergy_barcode_required">Strejkode er nødvendig!</string>
